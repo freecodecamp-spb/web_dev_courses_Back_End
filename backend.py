@@ -47,7 +47,7 @@ class CoursesView(ModelView):
     can_create = True 
     form = CoursesForm    
     
-class UsersVeiw(ModelView):
+class UsersView(ModelView):
     column_list =  ('github',)
     can_edit = True
     can_create = True
@@ -56,7 +56,7 @@ class UsersVeiw(ModelView):
 if __name__ == '__main__':
     admin = Admin(app, name='Admin panel', template_mode=None)
     admin.add_view(CoursesView(db['courses'], "Courses"))    
-    admin.add_view(UsersVeiw(db.users, 'Users'))
+    admin.add_view(UsersView(db.users, 'Users'))
     # parsing_coursera()
     # with open('data.json', 'r') as f:
     #     json_coursera = json.load(f)
