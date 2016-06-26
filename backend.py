@@ -62,5 +62,5 @@ if __name__ == '__main__':
     #     json_coursera = json.load(f)
     #     for doc in json_coursera:
     #         db.courses.insert(doc)
-    app.run(debug=True)
+    # app.run(debug=True)
 

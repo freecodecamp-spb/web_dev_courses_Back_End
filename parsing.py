@@ -6,7 +6,7 @@ import datetime
 
 def parsing_coursera():
     final_json = []
-    json.JSONEncoder.default = lambda self,obj: (obj.isoformat() if isinstance(obj, datetime.datetime) else None)
+    
     courses = get("https://api.coursera.org/api/courses.v1?q=search&query=web,веб&includes=instructorIds&fields=name,description,photoUrl,categories,primaryLanguages,instructorIds").json()["elements"]
     
     for elem in courses:
@@ -16,7 +16,7 @@ def parsing_coursera():
                 'title': elem['name'],
                 'author': ', '.join(author['fullName'] for author in get('https://api.coursera.org/api/instructors.v1?ids=' + ','.join(elem['instructorIds'])).json()['elements']),
                 'description': elem['description'],
-                'date': datetime.datetime.now(),
+                'date': json.dumps(datetime.datetime.now().date().isoformat()),
                 'image': elem['photoUrl'],
                 'language': ','.join(elem['primaryLanguages']),
                 'type': 'Video',
@@ -31,8 +31,10 @@ def parsing_coursera():
                 }
             }
         })
-    with open('data.json', 'w') as f:
+    with open('coursera_data.json', 'w') as f:
         json.dump(final_json, f)
+
+
     
 
 
